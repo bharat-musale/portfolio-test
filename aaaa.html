@@ -1,0 +1,518 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Bharat Musale — AI-Powered Cloud & DevOps Engineer</title>
+  <meta name="description" content="AI-Powered Cloud & DevOps Engineer — AWS, Terraform, Kubernetes, CI/CD, Agentic AI & Chatbots. I build scalable, self-healing cloud systems and AI agents for business automation." />
+  <meta name="keywords" content="AWS, DevOps, Cloud Automation, Terraform, Kubernetes, Docker, CI/CD, Agentic AI, Chatbot, MERN, LLM Integration" />
+  <meta name="author" content="Bharat Musale" />
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Person",
+    "name":"Bharat Musale",
+    "jobTitle":"AI-Powered Cloud & DevOps Engineer",
+    "url":"https://www.linkedin.com/in/bharat-musale4",
+    "sameAs":["https://github.com/bharat-musale"]
+  }
+  </script>
+
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg-1:#05061a;
+      --bg-2:#07102a;
+      --neon1:#00bfff;
+      --neon2:#9d4edd;
+      --glass: rgba(255,255,255,0.04);
+      --card-bg: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      --accent: linear-gradient(90deg,var(--neon1),var(--neon2));
+      --glass-border: rgba(0,191,255,0.12);
+      --muted: #9fb8cd;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    html,body{height:100%}
+    body{
+      font-family:'Space Grotesk',system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;
+      background: radial-gradient(circle at 10% 10%, rgba(13,18,38,0.5), transparent 20%), linear-gradient(180deg,var(--bg-1),var(--bg-2));
+      color:#e6eef8;
+      -webkit-font-smoothing:antialiased;
+      overflow-x:hidden;
+      position:relative;
+    }
+
+    /* full-page canvas for galaxy */
+    canvas#bg-canvas{position:fixed;inset:0;z-index:0;display:block}
+
+    .container{max-width:1200px;margin:0 auto;padding:28px;position:relative;z-index:2}
+
+    header{display:flex;justify-content:space-between;align-items:center;padding-top:10px}
+    .brand{display:flex;gap:12px;align-items:center}
+    .logo{
+      width:52px;height:52px;border-radius:12px;
+      background:linear-gradient(135deg,var(--neon1),var(--neon2));
+      display:flex;align-items:center;justify-content:center;font-weight:700;color:#021025;box-shadow:0 6px 24px rgba(0,191,255,0.08);
+    }
+    nav ul{display:flex;gap:16px;list-style:none}
+    nav a{color:var(--muted);padding:8px 12px;border-radius:8px;font-weight:600;transition:all .18s}
+    nav a:hover{color:#fff;background:rgba(255,255,255,0.03)}
+
+    /* hero */
+    .hero{min-height:70vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:48px 16px}
+    .hero-card{
+      max-width:980px;margin:0 auto;padding:44px;border-radius:22px;background:var(--card-bg);
+      border:1px solid var(--glass-border);backdrop-filter: blur(12px);box-shadow:0 10px 50px rgba(0,0,0,0.45);
+      position:relative;overflow:visible;
+    }
+    h1{
+      font-size:2.4rem;line-height:1.05;margin-bottom:10px;
+      background:var(--accent);-webkit-background-clip:text;-webkit-text-fill-color:transparent;
+    }
+    .subtitle{color:#cfeeff;margin-bottom:8px}
+    .muted{color:var(--muted);margin-bottom:12px}
+
+    .cta{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+    .btn{
+      padding:12px 22px;border-radius:999px;font-weight:700;border:none;cursor:pointer;transition:transform .18s,box-shadow .18s;
+      display:inline-flex;align-items:center;gap:10px;text-decoration:none;color:#021025;
+    }
+    .btn-primary{background:linear-gradient(90deg,var(--neon1),#0080ff);box-shadow:0 6px 28px rgba(0,191,255,0.22)}
+    .btn-primary:hover{transform:translateY(-4px);box-shadow:0 12px 48px rgba(0,191,255,0.35)}
+    .btn-ghost{background:transparent;color:#cfeeff;border:1px solid rgba(255,255,255,0.06);padding:10px 20px}
+
+    /* metrics */
+    .metrics{display:flex;gap:14px;justify-content:center;margin-top:18px;flex-wrap:wrap}
+    .metric{min-width:110px;background:rgba(255,255,255,0.02);padding:10px 14px;border-radius:12px;border:1px solid rgba(0,191,255,0.06);text-align:center}
+    .metric strong{display:block;font-size:1.2rem;color:#fff}
+
+    /* grid common */
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px;margin-top:18px}
+
+    /* cards with cursor-follow glow */
+    .card{
+      position:relative;padding:22px;border-radius:16px;background:rgba(255,255,255,0.02);
+      border:1px solid rgba(255,255,255,0.03);backdrop-filter:blur(10px);overflow:hidden;transition:transform .28s,box-shadow .28s;
+      will-change:transform;
+    }
+    .card::before{
+      content:'';position:absolute;inset: -30%;background:radial-gradient(circle at var(--mx,50%) var(--my,50%), rgba(0,191,255,0.08), transparent 10%);
+      opacity:0;transition:opacity .3s,transform .3s;
+      pointer-events:none;mix-blend-mode:screen;
+    }
+    .card::after{
+      content:'';position:absolute;inset:0;border-radius:inherit;padding:2px;
+      background:linear-gradient(90deg, rgba(0,191,255,0.06), rgba(157,78,221,0.04));
+      -webkit-mask: linear-gradient(#fff 0 0);
+      opacity:0.6;pointer-events:none;
+    }
+    .card.hovered{transform:translateY(-10px) rotateX(0.5deg) rotateY(0.5deg);box-shadow:0 20px 60px rgba(0,191,255,0.14)}
+    .card .title{font-size:1.1rem;color:#aef0ff;margin-bottom:10px}
+    .card p{color:#bcd7ea;line-height:1.6}
+
+    /* services emphasize cloud/devops weight */
+    #services .card{min-height:170px}
+    #services .card h3{color:#00d9ff;margin-bottom:10px}
+
+    /* tech stack cards (sleek) */
+    .stack-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;margin-top:12px}
+    .stack-card{padding:20px;border-radius:14px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border:1px solid rgba(0,191,255,0.06);backdrop-filter:blur(8px);transition:all .28s}
+    .stack-card:hover{transform:translateY(-8px);box-shadow:0 18px 48px rgba(0,191,255,0.12)}
+
+    /* AI section styling */
+    .ai-section{margin-top:28px}
+    .ai-grid{display:grid;grid-template-columns:1fr;gap:18px}
+    @media(min-width:900px){.ai-grid{grid-template-columns:repeat(2,1fr)}}
+
+    /* problems & solutions */
+    .ps-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin-top:14px}
+    .ps-card{padding:18px;border-radius:12px;background:linear-gradient(180deg, rgba(0,0,0,0.18), transparent);border:1px solid rgba(0,191,255,0.06)}
+
+    /* projects */
+    .projects-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(420px,1fr));gap:18px;margin-top:14px}
+
+    /* contact form */
+    .contact-card{max-width:760px;margin:18px auto;padding:20px;border-radius:16px;background:rgba(255,255,255,0.02);border:1px solid rgba(0,191,255,0.06);backdrop-filter:blur(8px)}
+    .form-row{display:flex;gap:12px;flex-wrap:wrap}
+    .form-row input,.form-row textarea{width:100%;padding:12px;border-radius:10px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.03);color:#e6eef8}
+
+    footer{margin-top:40px;padding:30px 0;text-align:center;color:var(--muted);border-top:1px solid rgba(255,255,255,0.03)}
+
+    /* small screens */
+    @media(max-width:760px){
+      h1{font-size:1.6rem}
+      .hero-card{padding:28px}
+    }
+  </style>
+</head>
+<body>
+  <!-- Galaxy canvas -->
+  <canvas id="bg-canvas"></canvas>
+
+  <div class="container">
+    <header>
+      <div class="brand">
+        <div class="logo">BM</div>
+        <div>
+          <div style="font-weight:700">Bharat Musale</div>
+          <div style="font-size:13px;color:var(--muted)">AI-Powered Cloud & DevOps Engineer</div>
+        </div>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#stack">Tech</a></li>
+          <li><a href="#ai">AI Agents</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <!-- HERO -->
+    <section class="hero" id="home">
+      <div class="hero-card" data-card>
+        <h1>AI-Powered Cloud & DevOps Engineer — Building Systems That Think and Scale</h1>
+        <p class="subtitle">AWS • Terraform • Kubernetes • CI/CD • Agentic AI • MERN</p>
+        <p class="muted">I build reliable cloud infrastructure and automation (60%), create AI agents & chatbots for repetitive business tasks (30%), and deliver web/mobile apps (10%).</p>
+
+        <div class="cta">
+          <a class="btn btn-primary" href="#contact">Hire Me</a>
+          <a class="btn btn-ghost" href="#projects">View Projects</a>
+        </div>
+
+        <div class="metrics" style="margin-top:18px">
+          <div class="metric"><strong>3+</strong><small style="display:block;color:var(--muted)">Years Experience</small></div>
+          <div class="metric"><strong>10+</strong><small style="display:block;color:var(--muted)">Projects</small></div>
+          <div class="metric"><strong>AWS</strong><small style="display:block;color:var(--muted)">Certified</small></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SERVICES (Cloud/DevOps heavy) -->
+    <section id="services" aria-labelledby="services-title">
+      <h2 style="color:#aee8ff;margin-bottom:12px">Services I Offer</h2>
+      <div class="grid">
+        <div class="card" data-card>
+          <h3>Cloud Efficiency Accelerator</h3>
+          <div style="margin:8px 0;color:var(--muted)">Outcome: -30% to -40% monthly AWS cost</div>
+          <p>Audit, right-size, and automate cloud infra using Terraform, autoscaling, scheduled policies and cost-aware CI/CD. Deliverables: cost report, Terraform modules, autoscale rules, and monitoring dashboards.</p>
+        </div>
+
+        <div class="card" data-card>
+          <h3>AI-Driven DevOps Automation</h3>
+          <div style="margin:8px 0;color:var(--muted)">Outcome: Faster MTTR, fewer false alerts</div>
+          <p>Integrate LLM-driven incident triage, auto-runbooks, synthetic checks, and self-healing Lambdas to reduce on-call volume and speed recovery.</p>
+        </div>
+
+        <div class="card" data-card>
+          <h3>Cloud Launchpad for AI Startups</h3>
+          <div style="margin:8px 0;color:var(--muted)">Outcome: MVP live & scalable (45 days)</div>
+          <p>Set up EKS/ECS, GPU provisioning, CI/CD pipelines, data pipelines (S3/RDS), and production monitoring so AI products can scale safely.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tech Stack (below services) -->
+    <section id="stack" aria-labelledby="stack-title" style="margin-top:30px">
+      <h2 style="color:#aee8ff;margin-bottom:12px">💠 My Core Tech Expertise</h2>
+      <div class="stack-grid">
+        <div class="stack-card" data-card>
+          <h4>☁️ Cloud & DevOps (60%)</h4>
+          <ul style="margin-top:10px;line-height:1.7;color:#bcd7ea">
+            <li><strong>AWS:</strong> EC2 • S3 • IAM • RDS • Lambda • CloudWatch</li>
+            <li><strong>Containers & Orchestration:</strong> Docker • Kubernetes (EKS/ECS)</li>
+            <li><strong>Automation & IaC:</strong> Terraform • Ansible • GitOps • Jenkins • GitHub Actions</li>
+            <li><strong>Monitoring & Reliability:</strong> Prometheus • Grafana • CloudWatch • Auto-healing</li>
+            <li><strong>Security & Cost:</strong> IAM hardening • right-sizing • cost alerts</li>
+          </ul>
+        </div>
+
+        <div class="stack-card" data-card>
+          <h4>🤖 AI & Automation (30%)</h4>
+          <ul style="margin-top:10px;line-height:1.7;color:#bcd7ea">
+            <li>Agentic AI • AI Agents Development • AutoGen • LangGraph • CrewAI</li>
+            <li>Prompt Engineering • LLM Integration (OpenAI, Anthropic, Hugging Face)</li>
+            <li>AI Workflows: alert triage, runbook automation, report generation</li>
+            <li>Omnichannel chatbots: Web, WhatsApp, Instagram, API integrations</li>
+          </ul>
+        </div>
+
+        <div class="stack-card" data-card>
+          <h4>💻 MERN & Apps (10%)</h4>
+          <ul style="margin-top:10px;line-height:1.7;color:#bcd7ea">
+            <li>React.js • Node.js • Express • MongoDB • REST APIs</li>
+            <li>Serverless front/back on AWS • CI/CD for web & mobile builds</li>
+            <li>End-to-end delivery: from code to cloud to monitoring</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- AI Use Cases and Agents (visual distinct area but unified look) -->
+    <section id="ai" class="ai-section" aria-labelledby="ai-title">
+      <h2 style="color:#aee8ff;margin-bottom:12px">AI-Driven Business Automation (30% focus)</h2>
+      <div class="ai-grid">
+        <div class="card" data-card>
+          <div class="title">AI Agents — Digital Employees</div>
+          <p>We build AI Agents that act like smart digital employees: they monitor cloud metrics, execute operational tasks, manage customer communication, and automate repetitive data work so humans can focus on growth.</p>
+          <ul style="margin-top:10px;color:#bcd7ea;line-height:1.6">
+            <li><strong>Ops agent:</strong> watches CloudWatch/Prometheus, triages anomalies, triggers auto-healing runbooks (Lambda/Terraform).</li>
+            <li><strong>Support agent:</strong> answers customers, creates tickets, and provides context to engineers (Slack/Teams integration).</li>
+            <li><strong>Data agent:</strong> extracts, summarizes and emails daily cost & infra reports using LLM-summary.</li>
+          </ul>
+        </div>
+
+        <div class="card" data-card>
+          <div class="title">Omnichannel Chatbots & Intelligent Assistants</div>
+          <p>Deploy chatbots that integrate with your webapp, WhatsApp (via Twilio/Meta APIs), and Instagram — responding with contextual and intelligent replies, handing off to agents when needed.</p>
+          <ul style="margin-top:10px;color:#bcd7ea;line-height:1.6">
+            <li>Website widget: fast FAQ, lead capture, and support handoff.</li>
+            <li>WhatsApp & Instagram bots: order status, booking, and payments integration.</li>
+            <li>Automated workflows: CRM updates, invoice reminders, and support ticket creation.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- mini use-case cards -->
+      <div style="margin-top:18px" class="grid">
+        <div class="card" data-card>
+          <div class="title">Use Case — Auto-healing Production</div>
+          <p>Agent detects CPU spike, launches replacement node on EKS, updates DNS, and posts incident summary in Slack with root cause and rollback option.</p>
+        </div>
+        <div class="card" data-card>
+          <div class="title">Use Case — Intelligent Cost Report</div>
+          <p>Daily LLM-generated summary of top 3 cost drivers with suggestions (right-size, schedule off-hours) delivered to email and Slack.</p>
+        </div>
+        <div class="card" data-card>
+          <div class="title">Use Case — 24/7 Sales & Support Bot</div>
+          <p>Chatbot handles inquiries, collects leads, schedules demos, and pushes high-intent leads directly to your CRM and calendar.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Problems & Solutions -->
+    <section id="problems" style="margin-top:26px">
+      <h2 style="color:#aee8ff;margin-bottom:12px">Problems I Solve (Cloud + AI)</h2>
+      <div class="ps-grid">
+        <div class="ps-card" data-card>
+          <h4 style="color:#aee8ff">Skyrocketing Cloud Bills</h4>
+          <p class="muted">Idle resources, misconfigured autoscaling, and missing tagging make bills unpredictable.</p>
+          <p style="color:#bcd7ea">Solution: Cost audit, tagging, reserved/spot strategy, scheduled shutdowns and Terraform modules to ensure predictable spend.</p>
+        </div>
+        <div class="ps-card" data-card>
+          <h4 style="color:#aee8ff">Long MTTR & Noisy Alerts</h4>
+          <p class="muted">Manual triage wastes time; false positives create alert fatigue.</p>
+          <p style="color:#bcd7ea">Solution: LLM-based triage + synthetic tests + automated rollbacks to shorten mean-time-to-recovery.</p>
+        </div>
+        <div class="ps-card" data-card>
+          <h4 style="color:#aee8ff">AI Workloads Unreliable or Costly</h4>
+          <p class="muted">GPU provisioning and inference are expensive and brittle.</p>
+          <p style="color:#bcd7ea">Solution: Right-sized GPU clusters, spot orchestration, caching strategies and monitoring to stabilize costs and performance.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects -->
+    <section id="projects" style="margin-top:26px">
+      <h2 style="color:#aee8ff;margin-bottom:12px">Featured Projects</h2>
+      <div class="projects-grid">
+        <div class="card" data-card>
+          <div class="title">Instafinn</div>
+          <p class="muted">Scalable social platform — role: Full-stack + Cloud infra</p>
+          <p style="color:#bcd7ea">Reduced hosting costs by 35% using Docker + EKS, auto-scaling and data optimization. Implemented CI/CD pipelines for zero-downtime deployments.</p>
+          <div style="margin-top:8px">
+            <span style="display:inline-block;padding:6px 12px;border-radius:999px;background:rgba(0,191,255,0.08);margin-right:6px;color:#00d9ff">EKS</span>
+            <span style="display:inline-block;padding:6px 12px;border-radius:999px;background:rgba(0,191,255,0.08);margin-right:6px;color:#00d9ff">Docker</span>
+            <span style="display:inline-block;padding:6px 12px;border-radius:999px;background:rgba(0,191,255,0.08);color:#00d9ff">CI/CD</span>
+          </div>
+        </div>
+
+        <div class="card" data-card>
+          <div class="title">Taxko</div>
+          <p class="muted">AI-driven tax automation — role: Architect + DevOps</p>
+          <p style="color:#bcd7ea">Built Terraform-driven multi-account AWS, serverless data extraction with LLMs, and Jenkins pipelines achieving 99.9% uptime.</p>
+          <div style="margin-top:8px">
+            <span style="display:inline-block;padding:6px 12px;border-radius:999px;background:rgba(0,191,255,0.08);margin-right:6px;color:#00d9ff">Terraform</span>
+            <span style="display:inline-block;padding:6px 12px;border-radius:999px;background:rgba(0,191,255,0.08);margin-right:6px;color:#00d9ff">Lambda</span>
+            <span style="display:inline-block;padding:6px 12px;border-radius:999px;background:rgba(0,191,255,0.08);color:#00d9ff">LLM</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" style="margin-top:32px">
+      <h2 style="color:#aee8ff;margin-bottom:12px">Let's Talk</h2>
+      <div class="contact-card card" data-card>
+        <form id="contactForm">
+          <div style="display:flex;gap:12px;flex-wrap:wrap">
+            <input type="text" name="name" placeholder="Your name" required style="flex:1;padding:12px;border-radius:10px;background:transparent;border:1px solid rgba(255,255,255,0.03);color:#e6eef8">
+            <input type="email" name="email" placeholder="Email" required style="flex:1;padding:12px;border-radius:10px;background:transparent;border:1px solid rgba(255,255,255,0.03);color:#e6eef8">
+          </div>
+          <div style="margin-top:12px">
+            <textarea name="message" rows="6" placeholder="Brief: pain, timeline, budget" required style="width:100%;padding:12px;border-radius:10px;background:transparent;border:1px solid rgba(255,255,255,0.03);color:#e6eef8"></textarea>
+          </div>
+          <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap">
+            <button class="btn btn-primary" type="submit">Send Message</button>
+            <a class="btn btn-ghost" href="mailto:bharatmusale5641@gmail.com">Email Directly</a>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <footer>
+      <div>© 2025 Bharat Musale · AI-Powered Cloud & DevOps Engineer · Pune, India</div>
+      <div style="margin-top:6px"><a href="https://www.linkedin.com/in/bharat-musale4" style="color:var(--neon1)">LinkedIn</a> · <a href="https://github.com/bharat-musale" style="color:var(--neon1)">GitHub</a></div>
+    </footer>
+  </div>
+
+  <!-- Scripts: galaxy particles + cursor-follow glow + tilt + simple interactions -->
+  <script>
+    /* ---------- Full-screen galaxy particle canvas ---------- */
+    const canvas = document.getElementById('bg-canvas');
+    const ctx = canvas.getContext('2d');
+    let w = canvas.width = innerWidth;
+    let h = canvas.height = innerHeight;
+    let particles = [];
+    const PARTICLE_COUNT = Math.floor((w*h)/40000); // density relative to screen
+    const TAU = Math.PI * 2;
+
+    function rand(min, max){ return Math.random() * (max - min) + min }
+
+    class Particle {
+      constructor(){
+        this.reset();
+      }
+      reset(){
+        this.x = rand(0, w);
+        this.y = rand(0, h);
+        this.vx = rand(-0.15, 0.15);
+        this.vy = rand(-0.05, 0.05);
+        this.size = rand(0.4, 2.6);
+        this.alpha = rand(0.06, 0.25);
+        this.hue = rand(180, 260); // blue-purple
+        this.life = rand(80, 300);
+        this.age = 0;
+      }
+      step(){
+        this.x += this.vx;
+        this.y += this.vy + Math.sin((this.x + this.y)/180) * 0.05;
+        this.age++;
+        if(this.age > this.life || this.x < -50 || this.x > w+50 || this.y < -50 || this.y > h+50) this.reset();
+      }
+      draw(ctx){
+        ctx.beginPath();
+        const g = ctx.createRadialGradient(this.x,this.y,0,this.x,this.y,this.size*8);
+        g.addColorStop(0, `hsla(${this.hue},95%,60%,${this.alpha})`);
+        g.addColorStop(0.3, `hsla(${this.hue},85%,50%,${this.alpha*0.5})`);
+        g.addColorStop(1, `rgba(0,0,0,0)`);
+        ctx.fillStyle = g;
+        ctx.arc(this.x,this.y,this.size,0,TAU);
+        ctx.fill();
+      }
+    }
+
+    function initParticles(){
+      particles = [];
+      for(let i=0;i<PARTICLE_COUNT;i++) particles.push(new Particle());
+    }
+
+    function onResize(){
+      w = canvas.width = innerWidth;
+      h = canvas.height = innerHeight;
+      initParticles();
+    }
+    addEventListener('resize', onResize);
+    initParticles();
+
+    function frame(){
+      ctx.clearRect(0,0,w,h);
+      // subtle backdrop shift gradient
+      let grd = ctx.createLinearGradient(0,0,w,h);
+      grd.addColorStop(0, 'rgba(9,12,25,0.12)');
+      grd.addColorStop(1, 'rgba(6,10,20,0.08)');
+      ctx.fillStyle = grd;
+      ctx.fillRect(0,0,w,h);
+
+      // draw particles
+      for(let p of particles){ p.step(); p.draw(ctx); }
+      requestAnimationFrame(frame);
+    }
+    frame();
+
+    /* ---------- Cursor-based light-follow + tilt on cards ---------- */
+    const cards = document.querySelectorAll('[data-card]');
+    const root = document.documentElement;
+    let mouse = {x: w/2, y: h/2};
+
+    window.addEventListener('mousemove', (e)=>{
+      mouse.x = e.clientX;
+      mouse.y = e.clientY;
+      root.style.setProperty('--mouse-x', mouse.x + 'px');
+      root.style.setProperty('--mouse-y', mouse.y + 'px');
+      // update each card's CSS variables for radial gradient
+      cards.forEach(card=>{
+        const rect = card.getBoundingClientRect();
+        const mx = ((mouse.x - rect.left) / rect.width) * 100;
+        const my = ((mouse.y - rect.top) / rect.height) * 100;
+        card.style.setProperty('--mx', mx + '%');
+        card.style.setProperty('--my', my + '%');
+      });
+    });
+
+    // tilt and light follow; add hover listeners
+    cards.forEach(card=>{
+      card.addEventListener('mouseenter', ()=>{ card.classList.add('hovered'); card.querySelector('::before'); });
+      card.addEventListener('mouseleave', ()=>{ card.classList.remove('hovered'); card.style.transform = ''; });
+      card.addEventListener('mousemove', (e)=>{
+        const rect = card.getBoundingClientRect();
+        const px = (e.clientX - rect.left) / rect.width;
+        const py = (e.clientY - rect.top) / rect.height;
+        const rx = (py - 0.5) * 10; // rotateX
+        const ry = (px - 0.5) * -10; // rotateY
+        card.style.transform = `perspective(900px) rotateX(${rx}deg) rotateY(${ry}deg) translateZ(6px)`;
+        // control inner radial highlight opacity
+        card.style.setProperty('--highlight-opacity', 1);
+      });
+    });
+
+    /* ---------- Simple smooth anchor scroll ---------- */
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click', (ev)=>{
+        ev.preventDefault();
+        const tgt = document.querySelector(a.getAttribute('href'));
+        if(tgt) tgt.scrollIntoView({behavior:'smooth', block:'start'});
+      })
+    });
+
+    /* ---------- Form submit (local demo) ---------- */
+    document.getElementById('contactForm')?.addEventListener('submit', function(e){
+      e.preventDefault();
+      alert('Thanks — message received. I will respond within 24 hours.');
+      this.reset();
+    });
+
+    /* ---------- Intersection reveal for light performance ---------- */
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(en=>{
+        if(en.isIntersecting) en.target.classList.add('in-view');
+      });
+    }, {threshold:0.12});
+    document.querySelectorAll('.card, .stack-card, .ps-card').forEach(el=>{
+      io.observe(el);
+    });
+
+    // responsiveness check for particle density on initial load
+    (function adjustParticleCount(){
+      // if small screens, reduce density
+      const area = window.innerWidth * window.innerHeight;
+      const desired = Math.max(30, Math.min(220, Math.floor(area/40000)));
+      // re-create particles with new count
+      particles.length = 0;
+      for(let i=0;i<desired;i++) particles.push(new Particle());
+    })();
+  </script>
+</body>
+</html>
